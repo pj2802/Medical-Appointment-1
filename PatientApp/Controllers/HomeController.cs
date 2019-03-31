@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PatientApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,9 +11,26 @@ namespace PatientApp.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            using (var db = new DataContext())
+            {
+
+                var joinData = (from s1 in db.Patients join s2 in db.Appointments on s1.PatientID equals s2.PatientID select new PatientVM { Patients = s1, Appointments = s2 }).ToList();
+
+                return View(joinData);
+            }
         }
 
+        [HttpPost]
+        public ActionResult Index(string PatientName, PatientVM patient)
+        {
+            using (var db = new DataContext())
+            {
+
+                var joinData = (from s1 in db.Patients join s2 in db.Appointments on s1.PatientID equals s2.PatientID where s1.PatientName.StartsWith(PatientName) select new PatientVM { Patients = s1, Appointments = s2 }).ToList();
+
+                return View(joinData);
+            }
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -26,5 +44,8 @@ namespace PatientApp.Controllers
 
             return View();
         }
+
+               
+
     }
 }

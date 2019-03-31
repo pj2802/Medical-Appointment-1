@@ -1,0 +1,74 @@
+﻿@model IEnumerable<PatientApp.Models.Appointments>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+<h2 align="center ">APPOINTMENTS</h2>
+<br />
+<div align="right" style="color:blue">
+    @ViewBag.CurrentDateTime
+</div>
+@*<div>
+        <button type="button" onclick="location.href ='@Url.Action("index","Patient")'">Patients List</button>
+    </div> *@
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Patients.PatientName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Temperature)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DoctorName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patients.PatientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Temperature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoctorName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.AppointmentID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.AppointmentID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.AppointmentID })
+            </td>
+
+
+        </tr>
+    }
+
+</table>

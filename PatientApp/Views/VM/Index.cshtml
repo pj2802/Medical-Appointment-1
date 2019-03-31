@@ -1,0 +1,49 @@
+﻿@model List<PatientApp.Models.PatientVM>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Patient's Complete Appointment Detail</h2>
+
+<form id="FormSearch" method="post">
+    <div class="row" id="SearchBox">
+        <div class="col-md-1">Patient Name </div>
+        <div class="col-md-2"><input type="text" id="PatientName" name="PatientName" /></div>
+        <div class="col-md-1"><input type="submit" id="SubmitSearch" value="Search" /></div>
+
+    </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th>Patient Name </th>
+        <th>Age </th>
+        <th>Gender </th>
+        <th>Marital Status </th>
+        <th>Address </th>
+        <th>Mobile Number </th>
+        <th>Doctor Name </th>
+        <th>Date Time </th>
+        <th>BP </th>
+        <th>Weight </th>
+        <th>Temperature </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Patients.PatientName</td>
+            <td>@item.Patients.Age</td>
+            <td>@item.Patients.Gender</td>
+            <td>@item.Patients.MaritalStatus</td>
+            <td>@item.Patients.Address</td>
+            <td>@item.Patients.MobileNumber</td>
+            <td>@item.Appointments.DoctorName </td>
+            <td>@item.Appointments.DateTime </td>
+            <td>@item.Appointments.BP </td>
+            <td>@item.Appointments.Weight</td>
+            <td>@item.Appointments.Temperature </td>
+        </tr>
+    }
+</table>
+<link href="~/Content/bootstrap-grid.css" rel="stylesheet" />

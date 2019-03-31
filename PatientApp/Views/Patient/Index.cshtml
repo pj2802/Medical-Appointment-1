@@ -1,0 +1,91 @@
+﻿@model IEnumerable<PatientApp.Models.Patients>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+<h2 align="center">PATIENTS</h2>
+<br />
+
+<p >
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<form id="FormSearch" method="post">
+
+    <div class="row" id="SearchBox">
+        <input class="form-control mr-sm-2" type="text" placeholder="Patient Name" id="PatientName" name="PatientName" />
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </div>
+
+</form>
+
+@*<form id="FormSearch" method="post" >
+        <div class="row" id="SearchBox">
+            <div class="col-md-1">Patient Name </div>
+            <div class="col-md-2"><input type="text" id="PatientName" name="PatientName" /></div>
+            <div class="col-md-1"><input type="submit" id="SubmitSearch" value="Search" /></div>
+
+        </div>
+    </form> *@
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaritalStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MobileNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaritalStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobileNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PatientID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PatientID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PatientID })
+
+            </td>
+            <td>
+                <button type="button" onclick="location.href ='@Url.Action("create","Appointment")'">Book Appointment</button>
+
+            </td>
+        </tr>
+    }
+
+</table>
