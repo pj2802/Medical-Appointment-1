@@ -15,11 +15,13 @@ namespace PatientApp.Models
            
             this.Appointments = new List<Appointments>();
         }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int PatientID { get; set; }
 
         [Required]
+        [RegularExpression(@"^(([A-Za-z]+[\s]{1}[A-Za-z]+)|([A-Za-z]+[\s]{1}[A-Za-z]+[\s]{1}[A-Za-z]+)|([A-Za-z]+))$", ErrorMessage="Please enter upper and lower case alphabets only")]
         [Display(Name = "Patient Name")]
         [StringLength(255)]
         public string PatientName { get; set; }
@@ -37,6 +39,7 @@ namespace PatientApp.Models
         [Required]
         [Display(Name = "Mobile Number")]
         [StringLength(50)]
+        [RegularExpression(@"^[\+][9][1][\-\s]?[1-9]\d{9}$|^[0][1-9]\d{9}$|^[1-9]\d{9}$", ErrorMessage= "Enter mobile no. in one of these formats: +91-7876765456|+91 7876765456| 07876765456| 7876765456")]
         public string MobileNumber { get; set; }
 
         [Required]

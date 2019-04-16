@@ -1,5 +1,6 @@
 ﻿using PatientApp.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -20,24 +21,33 @@ namespace PatientApp.Controllers
             return View(appointments);
         }
 
+
         public ActionResult Create()
         {
-            ViewBag.PatientID = new SelectList(db.Patients, "PatientID", "PatientName");
             return View();
         }
 
+                     
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AppointmentID,PatientID,DateTime,BP,Weight,Temperature,DoctorName")] Appointments appointments)
+        public ActionResult Create([Bind(Include = "Id,PatientID,DateTime,BP,Weight,Temperature,DoctorName")] Appointments appointments)
         {
+            ViewBag.PatientID = Session["MyData"];
             if (ModelState.IsValid)
             {
+              
                 db.Appointments.Add(appointments);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PatientID = new SelectList(db.Patients, "PatientID", "PatientName", appointments.PatientID);
+            // Patients data = TempData["mydata"] as Patients;
+            //ViewBag.PatientId = appointments.PatientID;
+
+            // ViewBag.PatientID =  new SelectList(db.Patients, "PatientID", "PatientName", appointments.PatientID);
+            ViewBag.PatientID = new List<Appointments>();
+
             return View(appointments);
         }
 
@@ -57,9 +67,10 @@ namespace PatientApp.Controllers
             return View(appointments);
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AppointmentID,PatientID,DateTime,BP,Weight,Temperature,DoctorName")] Appointments appointments)
+        public ActionResult Edit([Bind(Include = "Id,PatientID,DateTime,BP,Weight,Temperature,DoctorName")] Appointments appointments)
         {
             if (ModelState.IsValid)
             {
@@ -120,12 +131,6 @@ namespace PatientApp.Controllers
             }
             base.Dispose(disposing);
         }
-
-
-
-
-
-
 
     }
 }

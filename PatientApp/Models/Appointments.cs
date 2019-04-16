@@ -9,12 +9,13 @@ namespace PatientApp.Models
 {
     public class Appointments
     {
-
+        
         [Key]
-        public int AppointmentID { get; set; }
+        public int Id { get; set; }
 
-        //[DataType(DataType.DateTime )]
+        
         [Required]
+        
         [Display(Name = "Date & Time")]
         public DateTime DateTime { get; set; }
 

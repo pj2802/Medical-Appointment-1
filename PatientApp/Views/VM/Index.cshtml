@@ -1,49 +1,51 @@
-﻿@model List<PatientApp.Models.PatientVM>
+﻿
+
+@model List<PatientApp.Models.PatientVM>
 @{
     ViewBag.Title = "Index";
+    WebGrid grid = new WebGrid(Model, null, null, 5, true, true, null, null, null, null, null, null, null);
 }
 
-<h2>Patient's Complete Appointment Detail</h2>
+<br />
+<h2 align="center">Patient's Complete Appointment Detail</h2>
+<br />
 
 <form id="FormSearch" method="post">
-    <div class="row" id="SearchBox">
-        <div class="col-md-1">Patient Name </div>
-        <div class="col-md-2"><input type="text" id="PatientName" name="PatientName" /></div>
-        <div class="col-md-1"><input type="submit" id="SubmitSearch" value="Search" /></div>
 
+    <div class="row" id="SearchBox">
+        <input class="form-control mr-sm-2" type="text" placeholder="Patient Name" id="PatientName" name="PatientName" />
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
     </div>
+
 </form>
 
-<table class="table">
-    <tr>
-        <th>Patient Name </th>
-        <th>Age </th>
-        <th>Gender </th>
-        <th>Marital Status </th>
-        <th>Address </th>
-        <th>Mobile Number </th>
-        <th>Doctor Name </th>
-        <th>Date Time </th>
-        <th>BP </th>
-        <th>Weight </th>
-        <th>Temperature </th>
-    </tr>
+<br />
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.Patients.PatientName</td>
-            <td>@item.Patients.Age</td>
-            <td>@item.Patients.Gender</td>
-            <td>@item.Patients.MaritalStatus</td>
-            <td>@item.Patients.Address</td>
-            <td>@item.Patients.MobileNumber</td>
-            <td>@item.Appointments.DoctorName </td>
-            <td>@item.Appointments.DateTime </td>
-            <td>@item.Appointments.BP </td>
-            <td>@item.Appointments.Weight</td>
-            <td>@item.Appointments.Temperature </td>
-        </tr>
-    }
-</table>
+
+@grid.GetHtml(
+    tableStyle: "table table-bordered",
+    headerStyle: "info",
+    footerStyle: "webgrid-footer",
+    alternatingRowStyle: "webgrid-alternating-row",
+    selectedRowStyle: "webgrid-selected-row",
+    rowStyle: "gridrow",
+
+
+    columns: new[]
+{
+    grid.Column("PatientName","Patient Name"),
+    grid.Column("Age", "Age "),
+    grid.Column("Gender", "Gender"),
+    grid.Column("MaritalStatus","Marital Status"),
+    grid.Column("Address","Address"),
+    grid.Column(" MobileNumber","Mobile Number"),
+    grid.Column("DoctorName","Doctor Name"),
+    grid.Column("DateTime","Date Time"),
+    grid.Column("BP","BP"),
+    grid.Column("Weight","Weight"),
+    grid.Column("Temperature","Temperature"),
+}
+
+ )
+
 <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />

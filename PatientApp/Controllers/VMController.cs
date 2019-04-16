@@ -14,9 +14,10 @@ namespace PatientApp.Controllers
         {
             using (var db = new DataContext()) { 
 
-                var joinData = (from s1 in db.Patients join s2 in db.Appointments on s1.PatientID equals s2.PatientID select new PatientVM { Patients=s1, Appointments=s2}).ToList() ;
+                var JoinData = (from s1 in db.Patients join s2 in db.Appointments on s1.PatientID equals s2.PatientID select new PatientVM { Patients=s1, Appointments=s2}).ToList() ;
                            
-            return View(joinData);
+            return View(JoinData);
+
             }
         }
 
@@ -26,9 +27,9 @@ namespace PatientApp.Controllers
             using (var db = new DataContext())
             {
 
-                var joinData = (from s1 in db.Patients join s2 in db.Appointments on s1.PatientID equals s2.PatientID where s1.PatientName.StartsWith(PatientName) select new PatientVM { Patients = s1, Appointments = s2 }).ToList();
+                var JoinData  = (from s1 in db.Patients join s2 in db.Appointments on s1.PatientID equals s2.PatientID where s1.PatientName.Contains(PatientName) select new PatientVM { Patients = s1, Appointments = s2 }).ToList();
 
-                return View(joinData);
+                return View(JoinData);
             }
         } 
 

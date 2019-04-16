@@ -16,26 +16,38 @@ namespace PatientApp.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            ViewBag.CurrentDateTime = DateTime.Now;
-            var data= db.Patients.ToList();
-           // List<Patients> patients = db.Patients.ToList();
-            return View(data);
+           
+            var Data = db.Patients.ToList();
+           
+            return View(Data);
         }
+
+               
 
         [HttpPost]
         public ActionResult Index(string PatientName, Patients patients)
         {
-            var data = db.Patients.ToList().Where(p => p.PatientName.StartsWith(PatientName));
-            // List<Patients> patients = db.Patients.ToList();
-            return View(data);
+            var Data = db.Patients.ToList().Where(p => p.PatientName.Contains(PatientName));
+           
+            return View(Data);
+        }
+
+        
+        
+        public ActionResult Index2(int id)
+        {
+           
+            Session["MyData"] = id;
+            return RedirectToRoute("MyRoute");
         }
 
 
         public ActionResult Create()
         {
-           return View();
+            return View();
         }
 
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "PatientID,PatientName,Gender,Age,MaritalStatus,MobileNumber,Address")] Patients patients)
@@ -47,10 +59,9 @@ namespace PatientApp.Controllers
                 return RedirectToAction("Index");
             }
 
-
             return View(patients);
         }
-
+    
 
         public ActionResult Edit(int? id)
         {
@@ -66,6 +77,7 @@ namespace PatientApp.Controllers
             return View(patients);
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "PatientID,PatientName,Gender,Age,MaritalStatus,MobileNumber,Address")] Patients patients)
@@ -78,6 +90,7 @@ namespace PatientApp.Controllers
             }
             return View(patients);
         }
+
 
         public ActionResult Details(int? id)
         {
@@ -93,8 +106,7 @@ namespace PatientApp.Controllers
             return View(patients);
         }
 
-
-
+        
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -132,3 +144,4 @@ namespace PatientApp.Controllers
 
     }
 }
+

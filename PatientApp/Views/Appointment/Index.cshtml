@@ -10,9 +10,7 @@
 <div align="right" style="color:blue">
     @ViewBag.CurrentDateTime
 </div>
-@*<div>
-        <button type="button" onclick="location.href ='@Url.Action("index","Patient")'">Patients List</button>
-    </div> *@
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -62,9 +60,9 @@
                 @Html.DisplayFor(modelItem => item.DoctorName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.AppointmentID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.AppointmentID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.AppointmentID })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id}) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
 
 
@@ -72,3 +70,5 @@
     }
 
 </table>
+
+<link href="~/Content/bootstrap-grid.css" rel="stylesheet" />

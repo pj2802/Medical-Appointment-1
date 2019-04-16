@@ -8,7 +8,7 @@
 <h2 align="center">PATIENTS</h2>
 <br />
 
-<p >
+<p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
@@ -59,6 +59,7 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.PatientName)
+
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Gender)
@@ -75,17 +76,26 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
+
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.PatientID }) |
                 @Html.ActionLink("Details", "Details", new { id = item.PatientID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.PatientID })
+                @Html.ActionLink("Delete", "Delete", new { id = item.PatientID })|
+                @Html.ActionLink("Add", "Index2", new { id = item.PatientID }) 
+
+                @*<button type="button" id="buttonFn" onclick="location.href ='@Url.Action("Create","Appointment" )'">Book Appointment</button>*@
+
 
             </td>
-            <td>
-                <button type="button" onclick="location.href ='@Url.Action("create","Appointment")'">Book Appointment</button>
 
-            </td>
-        </tr>
-    }
 
-</table>
+
+
+
+                </tr>
+            }
+
+        </table>
+
+        <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+
